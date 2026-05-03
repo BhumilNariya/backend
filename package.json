@@ -4,7 +4,9 @@
   "description": "",
   "main": "script.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./http.js",
+    "phoenix":"node ./FileSystem.js",
+    "test":"echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -19,6 +21,7 @@
   },
   "homepage": "https://github.com/BhumilNariya/backend#readme",
   "dependencies": {
+    "express": "^5.2.1",
     "one-liner-joke": "^1.2.2"
   }
 }

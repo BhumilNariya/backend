@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/BhumilNariya/backend/issues"
   },
-  "homepage": "https://github.com/BhumilNariya/backend#readme"
+  "homepage": "https://github.com/BhumilNariya/backend#readme",
+  "dependencies": {
+    "one-liner-joke": "^1.2.2"
+  }
 }

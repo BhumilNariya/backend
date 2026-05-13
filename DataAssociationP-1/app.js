@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
-const userModel = require("../DataAssociationP-1/model/user");
-const postModel=require("../DataAssociationP-1/model/post");
+const userModel = require("./model/user");
+const postModel=require("./model/post");
 const cookieParser = require("cookie-parser");
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
+const multer=require("multer");
+const crypto=require("crypto");
+const path=require("path");
 
 app.set("view engine", "ejs");
 
@@ -12,12 +15,34 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images/uploads')
+  },
+  filename: function (req, file, cb) {
+    crypto.randomBytes(12,function(err,bytes){
+            const fn=bytes.toString("hex") +  path.extname(file.originalname);//extname =file extension  
+        cb(null, fn)
+    })
+  }
+})
+
+const upload = multer({ storage: storage })
+ 
+
 app.get("/", (req, res) => {
   res.render("index");
 });
 
 app.get("/login", (req, res) => {
   res.render("login");
+});
+app.post("/upload", upload.single("image") ,(req, res) => {
+    console.log(req.file);
+    res.redirect("/test");
+});
+app.get("/test", (req, res) => {
+  res.render("test");
 });
 
 app.get("/profile",isLoggedIn ,async (req, res) => {
